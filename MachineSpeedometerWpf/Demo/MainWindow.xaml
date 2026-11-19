@@ -1,0 +1,7 @@
+<Window x:Class="Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer"
+        Title="Speedometer Demo" Width="420" Height="420">
+    <local:MachineSpeedometerView x:Name="Speedometer" />
+</Window>
