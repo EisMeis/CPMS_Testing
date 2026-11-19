@@ -8,7 +8,9 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
+using Witron.Cpms.Shell.Manufacturing.Wpf.Content.ConverterLineUp.ViewModels;
+
+namespace Witron.Cpms.Shell.Manufacturing.Wpf.Content.ConverterLineUp.Views
 {
     /// <summary>Settings dialog built from the [Setting] attributes of <see cref="MachineSpeedometerSettings"/>.</summary>
     public sealed class SpeedometerSettingsDialog : Window
@@ -24,7 +26,7 @@ namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
 
             var tabs = new TabControl { Margin = new Thickness(8) };
             var groups = typeof(MachineSpeedometerSettings).GetProperties()
-                .Select(p => (Prop: p, Attr: p.GetCustomAttribute<SettingAttribute>()))
+                .Select(p => (Prop: p, Attr: p.GetCustomAttribute<SpeedometerSettingAttribute>()))
                 .Where(x => x.Attr != null)
                 .GroupBy(x => x.Attr.Category);
 

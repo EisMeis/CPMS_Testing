@@ -1,0 +1,243 @@
+﻿<UserControl
+    x:Class="Witron.Cpms.Shell.Manufacturing.Wpf.Content.ConverterLineUp.Views.MachineSpeedometerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cUI="http://schemas.witron.com/cpms"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
+    xmlns:local="clr-namespace:Witron.Cpms.Shell.Manufacturing.Wpf.Content.ConverterLineUp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Cursor="Hand"
+    ToolTip="Klicken für Einstellungen">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </UserControl.Resources>
+    <Grid Background="{Binding BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <dxga:CircularGaugeControl Grid.Row="0">
+            <dxga:CircularGaugeControl.Scales>
+                <dxga:ArcScale
+                    EndAngle="{Binding DataContext.EndAngle, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                    EndValue="{Binding DataContext.ScaleMax, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                    StartAngle="{Binding DataContext.StartAngle, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                    StartValue="0">
+                    <dxga:ArcScale.CustomElements>
+                        <dxga:ScaleCustomElement>
+                            <cUI:CpmsTextBlock
+                                Margin="28"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                CpmsName="LblSpeedDisplay"
+                                FontSize="32"
+                                FontWeight="SemiBold"
+                                Foreground="{Binding DataContext.ValueBrush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                                SnapsToDevicePixels="True"
+                                Text="{Binding DataContext.ValueText, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                                TextAlignment="Center"
+                                TextOptions.TextFormattingMode="Display"
+                                TextOptions.TextRenderingMode="ClearType"
+                                UseLayoutRounding="True"
+                                Visibility="{Binding DataContext.ShowSpeedLabel, Converter={StaticResource BoolToVisibility}, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                        </dxga:ScaleCustomElement>
+                    </dxga:ArcScale.CustomElements>
+                    <dxga:ArcScale.RangeBars>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="0"
+                            Value="{Binding DataContext.Zone1End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="14"
+                                    Offset="-20" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Zone1Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Zone1End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Zone2End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="14"
+                                    Offset="-20" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Zone2Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Zone2End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.ScaleMax, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="14"
+                                    Offset="-20" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Zone3Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[0].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[0].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[0].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[1].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[1].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[1].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[2].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[2].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[2].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[3].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[3].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[3].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[4].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[4].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[4].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[5].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[5].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[5].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                        <dxga:ArcScaleRangeBar
+                            AnchorValue="{Binding DataContext.Marks[6].Start, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}"
+                            Value="{Binding DataContext.Marks[6].End, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}">
+                            <dxga:ArcScaleRangeBar.Options>
+                                <dxga:ArcScaleRangeBarOptions
+                                    Thickness="8"
+                                    Offset="-38" />
+                            </dxga:ArcScaleRangeBar.Options>
+                            <dxga:ArcScaleRangeBar.Presentation>
+                                <dxga:DefaultArcScaleRangeBarPresentation Fill="{Binding DataContext.Marks[6].Brush, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                            </dxga:ArcScaleRangeBar.Presentation>
+                        </dxga:ArcScaleRangeBar>
+                    </dxga:ArcScale.RangeBars>
+                    <dxga:ArcScale.Needles>
+                        <dxga:ArcScaleNeedle Value="{Binding DataContext.NeedleValue, RelativeSource={RelativeSource AncestorType={x:Type local:MachineSpeedometerView}}}" />
+                    </dxga:ArcScale.Needles>
+                </dxga:ArcScale>
+            </dxga:CircularGaugeControl.Scales>
+        </dxga:CircularGaugeControl>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="4"
+            HorizontalAlignment="Center"
+            TextElement.Foreground="{Binding ForegroundBrush}">
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontWeight="SemiBold"
+                Text="{Binding UnitText}"
+                Visibility="{Binding ShowUnit, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="16"
+                FontWeight="Bold"
+                Foreground="{Binding ValueBrush}"
+                Text="{Binding DowntimeText}"
+                Visibility="{Binding ShowDowntime, Converter={StaticResource BoolToVisibility}}" />
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,0,16,0"
+                    Text="{Binding FeedsText, StringFormat='Feeds: {0}'}"
+                    Visibility="{Binding ShowFeedsLabel, Converter={StaticResource BoolToVisibility}}" />
+                <TextBlock
+                    Text="{Binding AvgShiftText, StringFormat='Ø Schicht: {0}'}"
+                    Visibility="{Binding ShowAvgShiftLabel, Converter={StaticResource BoolToVisibility}}" />
+            </StackPanel>
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding MachineIdText}"
+                Visibility="{Binding ShowMachineId, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding DescriptionText}"
+                Visibility="{Binding ShowDescription, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding JobText}"
+                Visibility="{Binding ShowJobHandle, Converter={StaticResource BoolToVisibility}}" />
+            <TextBlock
+                HorizontalAlignment="Center"
+                Text="{Binding CustomText}"
+                Visibility="{Binding ShowCustomText, Converter={StaticResource BoolToVisibility}}" />
+            <ItemsControl HorizontalAlignment="Center" ItemsSource="{Binding Marks}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel
+                            Margin="6,0"
+                            Orientation="Horizontal"
+                            Visibility="{Binding IsVisible, Converter={StaticResource BoolToVisibility}}">
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Margin="0,0,4,0"
+                                Fill="{Binding Brush}" />
+                            <TextBlock FontSize="11" Text="{Binding Text}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

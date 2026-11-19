@@ -1,13 +1,13 @@
 using System;
 
-namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
+namespace Witron.Cpms.Shell.Manufacturing.Wpf.Content.ConverterLineUp.ViewModels
 {
     public enum ScaleRangeType
     {
         ScheduledTimesOfJob = 1,
         HistoricalRuns = 2,
         OEErunSpeed = 3,
-        CostingSpeedCalculation = 4
+        CostingSpeedCalculation = 4,
     }
 
     public enum PointerSource
@@ -15,7 +15,7 @@ namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
         CurrentSpeed,
         AverageSpeed,
         FeedsHourInclusiveStops,
-        AverageSpeedExclStops
+        AverageSpeedExclStops,
     }
 
     /// <summary>Snapshot of all values the speedometer needs (LineUp + SP pS_Dashboard_SpeedometerValues).</summary>
@@ -45,7 +45,7 @@ namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
         public double? FeedsMark { get; set; }
         public double? OeeMark { get; set; }
 
-        /// <summary>True when LineUp MachineStatus != Started.</summary>
+        /// <summary>True when the LineUp MachineStatus is not "Started".</summary>
         public bool MachineDown { get; set; }
         public string DownCode { get; set; }
         public string DownReason { get; set; }
@@ -53,13 +53,15 @@ namespace Witron.Cpms.Shell.Manufacturing.Wpf.Speedometer
     }
 
     /// <summary>
-    /// Connection point to the real data (LineUpClient + stored procedure).
-    /// Implement this once and pass it to the view model.
+    /// Connection point to the real data (LineUpClient + SP pS_Dashboard_SpeedometerValues).
+    /// Raise <see cref="DataChanged"/> whenever new values are available (any thread).
     /// </summary>
     public interface ISpeedometerDataSource : IDisposable
     {
         event EventHandler<SpeedometerData> DataChanged;
+
         void Start();
+
         void ApplySettings(MachineSpeedometerSettings settings);
     }
 }
